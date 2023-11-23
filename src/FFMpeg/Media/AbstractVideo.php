@@ -29,7 +29,7 @@ abstract class AbstractVideo extends Audio
     /**
      * FileSystem Manager instance.
      *
-     * @var Manager
+     * @var TemporaryDirectory
      */
     protected $fs;
 
@@ -53,7 +53,7 @@ abstract class AbstractVideo extends Audio
     /**
      * {@inheritDoc}
      *
-     * @return Video
+     * @return AbstractVideo
      */
     public function addFilter(FilterInterface $filter)
     {
@@ -173,27 +173,6 @@ abstract class AbstractVideo extends Audio
                 $commands[] = '-b:v';
                 $commands[] = $format->getKiloBitrate().'k';
             }
-
-            $commands[] = '-refs';
-            $commands[] = '6';
-            $commands[] = '-coder';
-            $commands[] = '1';
-            $commands[] = '-sc_threshold';
-            $commands[] = '40';
-            $commands[] = '-flags';
-            $commands[] = '+loop';
-            $commands[] = '-me_range';
-            $commands[] = '16';
-            $commands[] = '-subq';
-            $commands[] = '7';
-            $commands[] = '-i_qfactor';
-            $commands[] = '0.71';
-            $commands[] = '-qcomp';
-            $commands[] = '0.6';
-            $commands[] = '-qdiff';
-            $commands[] = '4';
-            $commands[] = '-trellis';
-            $commands[] = '1';
         }
 
         if ($format instanceof AudioInterface) {

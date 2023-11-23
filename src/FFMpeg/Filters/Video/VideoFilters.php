@@ -17,11 +17,11 @@ use FFMpeg\Coordinate\Point;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Filters\Audio\AudioFilters;
 use FFMpeg\Filters\Audio\AudioResamplableFilter;
-use FFMpeg\Media\Video;
+use FFMpeg\Media\AbstractVideo;
 
 class VideoFilters extends AudioFilters
 {
-    public function __construct(Video $media)
+    public function __construct(AbstractVideo $media)
     {
         parent::__construct($media);
     }
