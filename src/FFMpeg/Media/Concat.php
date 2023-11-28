@@ -202,21 +202,19 @@ class Concat extends AbstractMediaType
         $commands[] = '-map';
         $commands[] = '[a]';
 
-        // Prepare the filters
-        $filters = clone $this->filters;
-        $filters->add(new SimpleFilter($format->getExtraParams(), 10));
+        $commands = array_merge($commands, $format->getExtraParams());
 
         if ($this->driver->getConfiguration()->has('ffmpeg.threads')) {
-            $filters->add(new SimpleFilter(['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads')]));
+            $commands = array_merge($commands, ['-threads', $this->driver->getConfiguration()->get('ffmpeg.threads')]);
         }
         if ($format instanceof VideoInterface) {
             if (null !== $format->getVideoCodec()) {
-                $filters->add(new SimpleFilter(['-vcodec', $format->getVideoCodec()]));
+                $commands = array_merge($commands, ['-vcodec', $format->getVideoCodec()]);
             }
         }
         if ($format instanceof AudioInterface) {
             if (null !== $format->getAudioCodec()) {
-                $filters->add(new SimpleFilter(['-acodec', $format->getAudioCodec()]));
+                $commands = array_merge($commands, ['-acodec', $format->getAudioCodec()]);
             }
         }
 
